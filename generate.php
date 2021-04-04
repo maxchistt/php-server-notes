@@ -16,5 +16,5 @@ function generate()
         ];
         array_push($arr, $card);
     };
-    return json_encode($arr);
+    return $arr;
 };
