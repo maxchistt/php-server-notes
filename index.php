@@ -1,11 +1,10 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: *');
+header('Access-Control-Allow-Origin: ' . "*");
 
-$user = $_POST["user"];
+$user = (string)($_POST["user"]);
 $target = $_POST["target"];
-$data = $_POST["data"];
-$filename = $user || "default";
+$data = json_encode($_POST["data"]);
+$filename = $user;
 $filepath = file_path($filename);
 
 include "./generate.php";
@@ -19,7 +18,7 @@ if ($target == "ip") {
         : (writeFileContent($filepath,  json_encode(generate())) ? readFileContent($filepath) : 'Ошибка при генерации данных');
 } else if ($target == "setData") {
     echo ($data)
-        ? (writeFileContent($filepath, json_encode($data)) ? 'Данные в файл успешно занесены' : 'Ошибка при записи в файл')
+        ? (writeFileContent($filepath,$data) ? 'Данные в файл успешно занесены' : 'Ошибка при записи в файл')
         : ("Пустой набор слов");
 } else {
     echo "неверный запрос";
