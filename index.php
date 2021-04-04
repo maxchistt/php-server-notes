@@ -1,15 +1,44 @@
-/*function generateCardsArr() {
-  let arr = []
-  for (let index = 0; index < 8; index++) {
-    let len = Math.floor(Math.random() * lorem.length);
-    arr.push({
-      id: Number(cardCount++),
-      completed: Boolean(Math.floor(Math.random() * 2)),
-      text: lorem.slice(0, len)
-    })
-  }
-  return arr
-};*/
+<?php
+$user = getallheaders()["user"];
+$filename = $user || "default";
+$filepath = file_path($filename);
 
-export const lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+include "./generate.php";
 
+if ($_GET) {
+    echo (readFileContent($filepath))
+        ? (readFileContent($filepath))
+        : (writeFileContent($filepath, generate()) ? readFileContent($filepath) : 'Ошибка при генерации данных');
+} else if ($_POST) {
+    echo ($_POST)
+        ? (writeFileContent($filepath, $_POST) ? 'Данные в файл успешно занесены' : 'Ошибка при записи в файл')
+        : ("Пустой набор слов");
+} else {
+    echo "неверный запрос";
+}
+
+function readFileContent($filepath)
+{
+    if (file_exists($filepath)) return file_get_contents($filepath);
+}
+
+function addFileContent($filepath, $text)
+{
+    return file_put_contents($filepath, $text, FILE_APPEND);
+}
+
+function writeFileContent($filepath, $text)
+{
+    return file_put_contents($filepath, $text);
+}
+
+function file_path($filename)
+{
+    return "./data/" . "$filename";
+}
+
+function str_replace_once($search, $replace, $text)
+{
+    $pos = strpos($text, $search);
+    return $pos !== false ? substr_replace($text, $replace, $pos, strlen($search)) : $text;
+}
