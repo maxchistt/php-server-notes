@@ -1,6 +1,6 @@
 <?php
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: Origin, Content-Type, application/json');
+header('Access-Control-Allow-Headers: *');
 
 $user = (string)($_POST["user"]);
 $target = $_POST["target"];
@@ -11,7 +11,27 @@ $filepath = file_path($filename);
 include "./generate.php";
 
 if (!$_POST) {
-    echo json_encode(scandir(file_path("")));
+    $met = json_encode($_SERVER["REQUEST_METHOD"]);
+    $req = json_encode($_REQUEST);
+    $fileslist = json_encode(scandir(file_path("")));
+    echo "
+        <div class='container p-3' style='paddig:3em;margin:2em;white-space: normal;word-wrap: break-word;'>
+        [ if (!\$_POST) ]
+        <br/><br/><hr/>
+        REQUEST_METHOD:
+        <br/>
+        $met
+        <br/>
+        REQUEST:
+        <br/>
+        $req
+        <br/><hr/>
+        Files on server: 
+        <br/>
+        $fileslist
+        <br/><hr/>
+        </div>
+        ";
 } else if ($target == "getData") {
     echo (readFileContent($filepath))
         ? (readFileContent($filepath))
