@@ -1,5 +1,6 @@
 <?php
-header('Access-Control-Allow-Origin: ' . "*");
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Origin, Content-Type, application/json');
 
 $user = (string)($_POST["user"]);
 $target = $_POST["target"];
