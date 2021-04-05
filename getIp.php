@@ -1,6 +1,8 @@
 <?php
 
-function getIp() {
+function getIp()
+{
+  $arr = [];
   $keys = [
     'HTTP_CLIENT_IP',
     'HTTP_X_FORWARDED_FOR',
@@ -10,9 +12,9 @@ function getIp() {
     if (!empty($_SERVER[$key])) {
       $ip = trim(end(explode(',', $_SERVER[$key])));
       if (filter_var($ip, FILTER_VALIDATE_IP)) {
-        return $ip;
+        array_push($arr, $ip);
       }
     }
   }
+  return json_encode($arr);
 }
-
