@@ -10,7 +10,7 @@ $filepath = file_path($filename);
 include "./generate.php";
 
 if (!$_POST) {
-    echo scandir(file_path(""));
+    echo json_encode(scandir(file_path("")));
 } else if ($target == "getData") {
     echo (readFileContent($filepath))
         ? (readFileContent($filepath))
