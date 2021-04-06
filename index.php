@@ -7,23 +7,24 @@ $target = $_POST["target"];
 $data = json_encode($_POST["data"]);
 $filename = $user;
 $filepath = file_path($filename);
+$mark = 'Server:';
 
 include "./generate.php";
 
 if (!$_POST) {
     $met = json_encode($_SERVER["REQUEST_METHOD"]);
     $req = json_encode($_REQUEST);
-    $fileslist = '[Server] ' . json_encode(scandir(file_path("")));
+    $fileslist = "$mark " . json_encode(scandir(file_path("")));
     include "./std_resp.php";
     echo makeHtmlResp($met, $req, $fileslist);
 } else if ($target == "getData") {
     echo (readFileContent($filepath))
         ? (readFileContent($filepath))
-        : (writeFileContent($filepath,  json_encode(generate())) ? readFileContent($filepath) : '[Server] Ошибка при генерации данных');
+        : (writeFileContent($filepath,  json_encode(generate())) ? readFileContent($filepath) : "$mark Ошибка при генерации данных");
 } else if ($target == "setData") {
     echo ($data)
-        ? (writeFileContent($filepath, $data) ? '[Server] Данные в файл успешно занесены' : '[Server] Ошибка при записи в файл')
-        : ("[Server] Пустой набор данных");
+        ? (writeFileContent($filepath, $data) ? "$mark Данные в файл успешно занесены" : "$mark Ошибка при записи в файл")
+        : ("$mark Пустой набор данных");
 } else {
     echo "[Server] Неверный запрос";
 }
