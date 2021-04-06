@@ -23,9 +23,9 @@ if (!$_POST) {
 } else if ($target == "setData") {
     echo ($data)
         ? (writeFileContent($filepath, $data) ? '[Server] Данные в файл успешно занесены' : '[Server] Ошибка при записи в файл')
-        : ("[Server] Пустой набор слов");
+        : ("[Server] Пустой набор данных");
 } else {
-    echo "[Server] неверный запрос";
+    echo "[Server] Неверный запрос";
 }
 
 function readFileContent($filepath)
