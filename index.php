@@ -10,6 +10,7 @@ $filepath = file_path($filename);
 $mark = 'Server:';
 
 include "./generate.php";
+sleep(1);
 
 if (!$_POST) {
     $met = json_encode($_SERVER["REQUEST_METHOD"]);
