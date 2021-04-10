@@ -18,16 +18,22 @@ if (!$_POST) {
     $fileslist = "$mark " . json_encode(scandir(file_path("")));
     include "./std_resp.php";
     echo makeHtmlResp($met, $req, $fileslist);
-} else if ($target == "getData") {
-    echo (readFileContent($filepath))
-        ? (readFileContent($filepath))
-        : (writeFileContent($filepath,  json_encode(generate())) ? readFileContent($filepath) : "$mark Ошибка при генерации данных");
-} else if ($target == "setData") {
-    echo ($data)
-        ? (writeFileContent($filepath, $data) ? "$mark Данные в файл успешно занесены" : "$mark Ошибка при записи в файл")
-        : ("$mark Пустой набор данных");
+} else if ($user && $target) {
+    if ($target == "getData") {
+        echo (readFileContent($filepath))
+            ? (readFileContent($filepath))
+            : (writeFileContent($filepath,  json_encode(generate())) ? readFileContent($filepath) : "$mark Ошибка при генерации данных");
+    } else if ($target == "setData") {
+        echo ($data)
+            ? (writeFileContent($filepath, $data) ? "$mark Данные в файл успешно занесены" : "$mark Ошибка при записи в файл")
+            : ("$mark Пустой набор данных");
+    } else {
+        echo "[Server] Неверный запрос (wrong target)";
+    }
 } else {
-    echo "[Server] Неверный запрос";
+    $uStat = !$user ? "(user unset)" : "";
+    $tStat = !$target ? "(target unset)" : "";
+    echo "[Server] Неверный запрос $uStat $tStat";
 }
 
 function readFileContent($filepath)
