@@ -18,11 +18,8 @@ if (!$_POST) {
     $fileslist = "$mark " . json_encode(scandir(file_path("")));
     include "./std_resp.php";
     include "./clear_all.php";
-    if ($req == "clear-all") {
-        echo clearAll();
-    } else {
-        echo makeHtmlResp($met, $req, $fileslist);
-    }
+    if ($req["clear-all"]) echo clearAll();
+    echo makeHtmlResp($met, $req, $fileslist);
 } else if ($user && $target) {
     if ($target == "getData") {
         echo (readFileContent($filepath))
