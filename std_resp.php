@@ -1,10 +1,16 @@
 <?php
 function makeHtmlResp($met, $req, $fileslist)
 {
-    return "
+    return '
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    '."
+    
     <div style='paddig:3em;margin:2em;white-space: normal;word-wrap: break-word;'>
-    [ if (!\$_POST) ]
-    <br/><br/><hr/>
+    <a href='?clear-all' class='btn btn-info'>Delete all</a>
+    <a href='/' class='btn btn-info'>Back</a>
+    </div>
+    <div style='paddig:3em;margin:2em;white-space: normal;word-wrap: break-word;'>
+    <hr/>
     REQUEST_METHOD:
     <br/>
     $met

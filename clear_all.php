@@ -11,6 +11,7 @@ function clearAll()
         //if ($filetime < $three_days_ago) {};
         $str .= (($del++ + 1) . ". $value - " . (unlink("$directory" . "$value") ? "del" : "fail") . " <br>" . "\r\n");
     }
+    if (!$str) $str = "none";
     return "
     <div style='paddig:3em;margin:2em;white-space: normal;word-wrap: break-word;'>
     <br/>
