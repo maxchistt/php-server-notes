@@ -12,7 +12,7 @@ function generate()
         $lenName = random_int(1, strlen($lorem_ipsum));
         $card = (object) [
             'id' => (int)($cardCount++),
-            'name' => (string)substr($lorem_ipsum, $lenName, ($lenName + 10) > strlen($lorem_ipsum) ? strlen($lorem_ipsum) : ($lenName + 10)),
+            'name' => (string)substr($lorem_ipsum, $lenName, ($lenName + 30) > strlen($lorem_ipsum) ? ($lenName + 30) - strlen($lorem_ipsum) : (random_int(10, 30))),
             'completed' => (bool)(random_int(0, 1)),
             'text' => (string)substr($lorem_ipsum, 0, $lenText)
         ];
