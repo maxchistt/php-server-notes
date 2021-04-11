@@ -13,8 +13,7 @@ function clearAll()
     }
     if (!$str) $str = "none";
     return "
-    <br/>
-    <div class='container mt-3' style='white-space: normal;word-wrap: break-word;'>
+    <div class='container mt-5' style='white-space: normal;word-wrap: break-word;'>
     
     Deleted files:
     <br/><hr/>
