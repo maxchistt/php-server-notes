@@ -10,7 +10,7 @@ $filepath = file_path($filename);
 $mark = 'Server:';
 
 include "./generate.php";
-sleep(1);
+usleep(300 * 1000);
 
 if (!$_POST) {
     $met = json_encode($_SERVER["REQUEST_METHOD"]);
@@ -18,7 +18,9 @@ if (!$_POST) {
     $fileslist = "$mark " . json_encode(scandir(file_path("")));
     include "./std_resp.php";
     include "./clear_all.php";
-    if (isset($_REQUEST["clear-all"])) {echo clearAll();};
+    if (isset($_REQUEST["clear-all"])) {
+        echo clearAll();
+    };
     echo makeHtmlResp($met, $req, $fileslist);
 } else if ($user && $target) {
     if ($target == "getData") {
