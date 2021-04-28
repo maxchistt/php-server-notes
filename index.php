@@ -25,7 +25,7 @@ if (!$_POST) {
 } else if ($user && $target) {
     if ($target == "getData") {
         echo (readFileContent($filepath))
-            ? (readFileContent($filepath))
+            ? (readFileContent($filepath) || "")
             : (writeFileContent($filepath,  json_encode(generate())) ? readFileContent($filepath) : "$mark Ошибка при генерации данных");
     } else if ($target == "setData") {
         echo ($data)
